@@ -34,6 +34,8 @@ public class PlayerMove : MonoBehaviour
     public AudioSource audioDataDead;
 
     public GameObject winText;
+
+    public static bool faceRight = true;
     
 
     // Start is called before the first frame update
@@ -85,6 +87,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D)) //controller
         {
+            faceRight = true;
             //myRender.sprite = walkSprite;
             myRender.flipX = false;
             walkAnim.SetBool("isWalking", true);
@@ -96,6 +99,7 @@ public class PlayerMove : MonoBehaviour
         } 
         else if (Input.GetKey(KeyCode.A))
         {
+            faceRight = false;
             LRmove(-speed);
             walkAnim.SetBool("isWalking", true);
             //myRender.sprite = walkSprite;
@@ -118,10 +122,13 @@ public class PlayerMove : MonoBehaviour
                 audioDataJump.Play();
             }
         } 
+       
+        /*
         else if(!Input.GetKey(KeyCode.W) && !onFloor) //jump physics-- adding extra force over time throughout the jump. in this case, if going up, add the boost
         {
             myBody.velocity += Vector2.up * Physics2D.gravity.y * (jumpHeight - 1f) * Time.deltaTime; 
         } 
+        */
        
         //-----------------------
         if (Input.GetKey(KeyCode.Space) && biting == false)
@@ -171,6 +178,7 @@ public class PlayerMove : MonoBehaviour
             bite.transform.position = new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y);
             myBody.velocity += Vector2.left * speed * (biteForce - 5f) * Time.deltaTime;
             walkAnim.SetBool("isWalking", true);
+
         }
 
 
