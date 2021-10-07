@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PLAYERMOVEDUMBASS : MonoBehaviour
 {
-    public float speed;
     public Rigidbody2D myBody;
-    public static bool faceRight = true;
+
+    public float speed;
+    public float dist;
+    bool hasHit = false;
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,48 +21,103 @@ public class PLAYERMOVEDUMBASS : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkKeys();
+        Vector3 mPos = Input.mousePosition;
+        mPos = Camera.main.ScreenToWorldPoint(mPos);
+        rotateSelf(mPos);
+
+        if (Input.GetAxis("Vertical") > 0.1f) //input checks for any upwards input-- w, up arrow, up controller, etc. (0.1f is for sensitivity of input)
+        {
+            moveSelf(mPos);
+        }
     }
 
-
-
-
-    void checkKeys()
+    private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W))
+        Debug.DrawRay(transform.position, transform.right * dist, Color.red);
+        if (Physics2D.Raycast(transform.position, transform.right, dist))
         {
-            UDmove(speed);
+            if (!hasHit)
+            {
+               // Debug.Log("hit something!");
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, dist); // logs the obj the raycast hits
+                hit.transform.gameObject.GetComponent<Animator>().SetTrigger("doBounce");
+                //musicMaker(hit.transform.gameObject); //applies hit obj to the music maker function
+                hasHit = true;
+            }
         }
-        else if (Input.GetKey(KeyCode.S))
+        else
         {
-            UDmove(-speed);
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            LRmove(-speed);
-            faceRight = false;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            LRmove(speed);
-            faceRight = true;
+            hasHit = false;
         }
     }
 
 
 
-    void LRmove(float direction) //for movement left right
+    /*
+        void checkKeys()
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                UDmove(speed);
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                UDmove(-speed);
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                LRmove(-speed);
+                faceRight = false;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                LRmove(speed);
+                faceRight = true;
+            }
+        }
+
+
+
+        void LRmove(float direction) //for movement left right
+        {
+            myBody.velocity = new Vector3(direction, myBody.velocity.y);
+        }
+
+        void UDmove(float direction) //for movement left right
+        {
+            myBody.velocity = new Vector3(myBody.velocity.x, direction);
+        }
+    */
+
+
+    void rotateSelf(Vector3 mousePos)
     {
-        myBody.velocity = new Vector3(direction, myBody.velocity.y);
+        //finding the difference between current facing direction and mouse position
+        Vector2 direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        transform.right = direction;
     }
 
-    void UDmove(float direction) //for movement left right
+    void moveSelf(Vector3 mousePos)
     {
-        myBody.velocity = new Vector3(myBody.velocity.x, direction);
+        mousePos = new Vector3(mousePos.x, mousePos.y, 0f); //keeps mouse position at the same depth
+        float step = speed * Time.deltaTime; //makes speed frame-independent
+        transform.position = Vector3.MoveTowards(transform.position, mousePos, step); // moving towards mouse position at speed step
+
     }
 
 
+    /*
+    void musicMaker(GameObject hit)
+    {
+        float volume = Vector3.Distance(hit.transform.position, transform.position);
+        volume = 1f - (volume / 10f);
+        mySource.volume = volume;
+        AudioClip newClip = hit.GetComponent<Sound>().mySound; //gets variable from Sound script
+        mySource.clip = newClip;
+        mySource.Play();
+    }
+    */
 
 
 
