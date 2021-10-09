@@ -21,7 +21,7 @@ public class switches : MonoBehaviour
     {
 
 
-        Debug.Log(hit);
+        //Debug.Log(hit);
         resetTimer += 1;
 
         if(resetTimer > resetTimerMax)

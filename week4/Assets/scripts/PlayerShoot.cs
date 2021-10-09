@@ -33,9 +33,12 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject newBeam = Instantiate(beam, transform.position, transform.rotation);
-            //newBeam.transform.SetParent(gameObject.transform);
+            newBeam.transform.SetParent(gameObject.transform);
             newBeam.transform.eulerAngles = new Vector3(0, 0, angle);
-            newBeam.transform.localPosition = new Vector3(transform.position.x , transform.position.y, transform.position.z);
+            newBeam.transform.position = new Vector3(transform.position.x , transform.position.y, transform.position.z);
+            newBeam.transform.parent = null;
+            
+            //newBeam.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
         
 

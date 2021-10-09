@@ -18,9 +18,9 @@ public class beamBehavior : MonoBehaviour
 
         Vector3 mPos = Input.mousePosition;
         mPos = Camera.main.ScreenToWorldPoint(mPos);
+        Vector3 dir = new Vector2(mPos.x - transform.position.x, mPos.y - transform.position.y);
 
-        rotateForce(mPos);
-        myBody.AddForce(mPos, ForceMode2D.Impulse);
+        myBody.AddForce(dir, ForceMode2D.Impulse);
     
     }
 

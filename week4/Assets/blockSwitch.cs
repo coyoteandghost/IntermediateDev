@@ -11,13 +11,17 @@ public class blockSwitch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(switch1.GetComponent<blockDoor>().hit == true && switch2.GetComponent<blockDoor>().hit == true && switch3.GetComponent<blockDoor>().hit == true)
+        Debug.Log(switch1.GetComponent<blockDoor>().hit);
+
+
+        if (switch1.GetComponent<blockDoor>().hit == true && 
+           switch2.GetComponent<blockDoor>().hit == true && 
+           switch3.GetComponent<blockDoor>().hit == true)
         {
             Destroy(gameObject);
         }

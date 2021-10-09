@@ -5,6 +5,7 @@ using UnityEngine;
 public class blockDoor : MonoBehaviour
 {
     public bool hit;
+    public GameObject collisionObj;
 
     // Start is called before the first frame update
     void Start()
@@ -15,13 +16,13 @@ public class blockDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(hit);
+        
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "box")
+        if(collision.gameObject == collisionObj)
         {
             hit = true;
         } 
