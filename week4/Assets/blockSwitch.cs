@@ -16,7 +16,7 @@ public class blockSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(switch1.GetComponent<blockDoor>().hit);
+       // Debug.Log(switch1.GetComponent<blockDoor>().hit);
 
 
         if (switch1.GetComponent<blockDoor>().hit == true && 

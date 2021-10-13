@@ -6,6 +6,7 @@ TagManager:
   tags:
   - beam
   - box
+  - wall
   layers:
   - Default
   - TransparentFX

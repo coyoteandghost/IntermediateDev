@@ -9,13 +9,14 @@ public class PLAYERMOVEDUMBASS : MonoBehaviour
     public float speed;
     public float dist;
     bool hasHit = false;
-    
+    //public bool useFullKinematicContacts;
 
 
     // Start is called before the first frame update
     void Start()
     {
 
+       
     }
 
     // Update is called once per frame
@@ -28,7 +29,8 @@ public class PLAYERMOVEDUMBASS : MonoBehaviour
         if (Input.GetAxis("Vertical") > 0.1f) //input checks for any upwards input-- w, up arrow, up controller, etc. (0.1f is for sensitivity of input)
         {
             moveSelf(mPos);
-        }
+        } 
+       
     }
 
     private void FixedUpdate()
@@ -51,45 +53,7 @@ public class PLAYERMOVEDUMBASS : MonoBehaviour
         }
     }
 
-
-
-    /*
-        void checkKeys()
-        {
-            if (Input.GetKey(KeyCode.W))
-            {
-                UDmove(speed);
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                UDmove(-speed);
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                LRmove(-speed);
-                faceRight = false;
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                LRmove(speed);
-                faceRight = true;
-            }
-        }
-
-
-
-        void LRmove(float direction) //for movement left right
-        {
-            myBody.velocity = new Vector3(direction, myBody.velocity.y);
-        }
-
-        void UDmove(float direction) //for movement left right
-        {
-            myBody.velocity = new Vector3(myBody.velocity.x, direction);
-        }
-    */
-
+ 
 
     void rotateSelf(Vector3 mousePos)
     {
@@ -103,6 +67,7 @@ public class PLAYERMOVEDUMBASS : MonoBehaviour
         mousePos = new Vector3(mousePos.x, mousePos.y, 0f); //keeps mouse position at the same depth
         float step = speed * Time.deltaTime; //makes speed frame-independent
         transform.position = Vector3.MoveTowards(transform.position, mousePos, step); // moving towards mouse position at speed step
+        //myBody.velocity = Vector3.MoveTowards(myBody.velocity, mousePos, step);
 
     }
 
