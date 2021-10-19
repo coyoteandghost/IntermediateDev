@@ -7,7 +7,7 @@ public class doorOpen : MonoBehaviour
     public GameObject openedDoor;
     public GameObject keyPlacement;
     Vector3 newPos;
-
+    public AudioSource mySource;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,9 @@ public class doorOpen : MonoBehaviour
     {
         if(collision.gameObject == keyPlacement)
         {
-             Destroy(openedDoor);
+            mySource.Play();
+            Destroy(openedDoor);
+             
         }
     }
 

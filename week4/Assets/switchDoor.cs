@@ -7,7 +7,7 @@ public class switchDoor : MonoBehaviour
     public GameObject switch1;
     public GameObject switch2;
     public GameObject switch3;
-   
+    public AudioSource mySource;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +19,7 @@ public class switchDoor : MonoBehaviour
     {
         if (switch1.GetComponent<switches>().hit == true && switch2.GetComponent<switches>().hit == true && switch3.GetComponent<switches>().hit == true)
         {
+            mySource.Play();
             Destroy(gameObject);
         }
     }
