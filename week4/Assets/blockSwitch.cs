@@ -7,8 +7,7 @@ public class blockSwitch : MonoBehaviour
     public GameObject switch1;
     public GameObject switch2;
     public GameObject switch3;
-    public AudioSource mySource;
-
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +24,7 @@ public class blockSwitch : MonoBehaviour
            switch3.GetComponent<blockDoor>().hit == true)
         {
             Destroy(gameObject);
-            mySource.Play();
+            
         }
     }
 }

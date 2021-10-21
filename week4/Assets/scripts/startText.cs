@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class startText : MonoBehaviour
 {
-    
+   
+
 
     private void Update()
     {
