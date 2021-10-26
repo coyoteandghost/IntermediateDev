@@ -10,12 +10,19 @@ public class listener : MonoBehaviour
     public GameObject switch4;
     public GameObject switch5;
     public AudioSource mySource;
-    public bool destroyed;
+    public bool destroyed = false;
 
     public GameObject testSwitch1;
     public GameObject testSwitch2;
     public GameObject testSwitch3;
-    public bool testDestroyed;
+    public bool testDestroyed = false;
+
+    public GameObject musicswitch1;
+    public GameObject musicswitch2;
+    public GameObject musicswitch3;
+    public GameObject musicswitch4;
+    public GameObject musicswitch5;
+    public bool musicDestroyed = false;
 
 
     // Update is called once per frame
@@ -23,6 +30,7 @@ public class listener : MonoBehaviour
     {
         MusicTestRoom();
         FirstTestRoom();
+        MusicMazeRoom();
     }
 
 
@@ -53,6 +61,21 @@ public class listener : MonoBehaviour
             mySource.Play();
         }
     }
+
+    void MusicMazeRoom()
+    {
+        if (musicswitch1.GetComponent<switches>().hit == true
+       && musicswitch2.GetComponent<switches>().hit == true
+       && musicswitch3.GetComponent<switches>().hit == true
+       && musicswitch4.GetComponent<switches>().hit == true
+       && musicswitch5.GetComponent<switches>().hit == true
+       && musicDestroyed == false)
+        {
+            musicDestroyed = true;
+            mySource.Play();
+        }
+    }
+
 
 }
 
